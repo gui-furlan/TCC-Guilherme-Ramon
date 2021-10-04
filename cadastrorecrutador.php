@@ -27,17 +27,13 @@ if (!$mysqli->connect_error) {
 
     if (!isset($_SESSION['login'])) {
         require_once "classes/Pessoa.php";
-        require_once "classes/PessoaJurifica.php";
+        require_once "classes/PessoaJuridica.php";
 
         /**
          * Verifica se o formulário está preenchido.
          * Se estiver, prossegue para o cadastro no banco.
          * Se não, carrega o formulário para preenchimento.
          */
-
-
-        // MUDAR DAQUI PRA BAIXOOO
-
          
         if (
             isset($_POST['nome']) && isset($_POST['cnpj']) && isset($_POST['email']) 
@@ -49,25 +45,19 @@ if (!$mysqli->connect_error) {
              * com as informações do formulário
              */
             $nome = $_POST['nome'];
-            $sobrenome = $_POST['sobrenome'];
-            $cpf = $_POST['cpf'];
+            $cnpj = $_POST['cnpj'];
             $email = $_POST['email'];
             $area = $_POST['area'];
-            $nascimento = $_POST['nascimento'];
-            $sexo = $_POST['sexo'];
             $estado = $_POST['estado'];
             $cidade = $_POST['municipio'];
             $cep = $_POST['cep'];
             $senha = $_POST['senha'];
 
-            $pessoa = new PessoaFisica(
+            $pessoa = new PessoaJuridica(
                 $nome,
-                $sobrenome,
-                $cpf,
+                $cnpj,
                 $email,
                 $area,
-                $nascimento,
-                $sexo,
                 $estado,
                 $cidade,
                 $cep,
@@ -76,15 +66,9 @@ if (!$mysqli->connect_error) {
 
             /**
              * Preparativos para o banco:
-             * Sexo cadastrado como M ou F.
              * Tipo atribuído como F (apenas banco).
              **/
-            if ($sexo == "Feminino") {
-                $sexo = "F";
-            } else {
-                $sexo = "M";
-            }
-            $tipo = "F";
+            $tipo = "J";
 
             /**
              * Cadastrar no banco:
@@ -94,18 +78,15 @@ if (!$mysqli->connect_error) {
              * Se executar, inicia uma sessão
              * Se der erro, lança erro =)
              */
-            $query = "INSERT INTO pessoa (nome_pes, sobrenome_pes, cpf_pes,
-                data_nasc_pes, sexo_pes, area_pes, email_pes, senha_pes, tipo_pes)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO pessoa (nome_pes, cnpj_pes,
+                area_pes, email_pes, senha_pes, tipo_pes)
+                VALUES (?, ?, ?, ?, ?, ?)";
 
             if ($stmt = $mysqli->prepare($query)) {
                 $stmt->bind_param(
-                    "sssssssss",
+                    "ssssss",
                     $nome,
-                    $sobrenome,
-                    $cpf,
-                    $nascimento,
-                    $sexo,
+                    $cnpj,
                     $area,
                     $email,
                     $senha,
@@ -123,7 +104,7 @@ if (!$mysqli->connect_error) {
             }
         } else {
             include "includes/header.php";
-            include "includes/form_cadastroprofissional.php";
+            include "includes/form_cadastrorecrutador.php";
             include "includes/footer.php";
         }
     } else {
@@ -132,3 +113,5 @@ if (!$mysqli->connect_error) {
 } else {
     die("Erro ao conectar-se ao banco de dados: " . $mysqli->connect_error);
 }
+
+$mysqli->close();

@@ -128,3 +128,5 @@ if (!$mysqli->connect_error) {
 } else {
     die("Erro ao conectar-se ao banco de dados: " . $mysqli->connect_error);
 }
+
+$mysqli->close();
