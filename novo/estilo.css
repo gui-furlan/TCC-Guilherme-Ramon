@@ -1,0 +1,273 @@
+/* includes/header.php */
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url(font/Montserrat/Montserrat-Medium.ttf) format('truetype');
+}
+
+:root {
+    --corClara: #EBEBEB;
+    --corEscura: #222;
+    --corAzul: #254fd6;
+    --fonteTitulo: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url(img/fundo1.png);
+    font-family: Helvetica, sans-serif;
+}
+
+.container {
+    margin: 0 auto;
+    width: 1200px;
+}
+
+.clear {
+    clear: both;
+}
+
+header {
+    background-color: var(--corAzul);
+    border-bottom: 1px solid var(--corEscura);
+    font-family: var(--fonteTitulo);
+    padding: 20px 0px 20px 0;
+    width: 100%;
+}
+
+.header-logo {
+    color: var(--corClara);
+    float: left;
+    text-decoration: none;
+    width: 10%;
+}
+
+.header-logo:hover {
+    text-decoration: underline;
+}
+
+.header-login {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--corClara);
+    float: right;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.header-login:hover {
+    color: #FFF;
+    text-decoration: underline;
+}
+
+/* includes/footer.php */
+
+footer {
+    background-color: var(--corEscura);
+    border-top: 1px solid var(--corAzul);
+    color: var(--corClara);
+    font-size: 10pt;
+    margin-top: 20px;
+    padding: 10px 0px 10px 0px;
+}
+
+/* NOVO landpage.php */
+
+.index-main h1{
+    color: var(--corClara);
+    font-family: var(--fonteTitulo);
+    font-size: 25pt;
+    margin-top: 150px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.boas-vindas {
+    background-image: url(img/fundo4.jpg);
+    background-attachment: fixed;
+    border: 1px solid black;
+    height: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    width: 100%;
+}
+
+.boas-vindas p{
+    color: var(--corClara);
+    font-family: var(--fonteTitulo);
+    font-size: 15pt;
+    text-align: center;
+}
+
+/* includes/conteudoindex.php */
+
+.index-boas-vindas {
+    color: #ebebeb;
+    text-align: center;
+    padding: 30px 40px 30px 40px;
+    margin: 50px auto 60px auto;
+    width: 70%;
+    line-height: 20pt;
+}
+
+.index-boas-vindas h1 {
+    margin-bottom: 20px;
+}
+
+.index-boas-vindas p {
+    font-size: 12pt;
+}
+
+.index-criar-conta {
+    background-color: var(--corEscura);
+    border-radius: 0px 13px 13px 0px;
+    color: #ebebeb;
+    float: left;
+    line-height: 18pt;
+    padding: 30px 50px 30px 50px;
+    text-align: center;
+    width: 50%;
+}
+
+.index-criar-conta:nth-child(2) {
+    border-radius: 13px 0px 0px 13px;
+    border-right: 2px solid #ebebeb;
+}
+
+.index-criar-conta h3 {
+    margin-bottom: 20px;
+}
+
+.index-criar-conta p {
+    margin-bottom: 30px;
+}
+
+.index-criar-conta a {
+    color: #ebebeb;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.index-criar-conta a:hover {
+    color: var(--corAzul);
+    text-decoration: underline;
+}
+
+/* includes/form_cadastroprofissional.php */
+
+/* includes/form_cadastrorecrutador.php */
+
+/* includes/form_login.php */
+
+.formulario {
+    background: #ebebeb;
+    border-radius: 13px;
+    margin: 75px auto 75px auto;
+    padding-top: 30px;
+    text-align: center;
+    width: 50%;
+}
+
+.formulario hr {
+    margin: 20px auto 20px auto;
+    width: 30%;
+}
+
+.formulario form {
+    margin: auto;
+    text-align: initial;
+    width: 80%;
+}
+
+.formulario-h3 {
+    text-align: center;
+}
+
+.formulario label {
+    float: left;
+}
+
+.formulario input {
+    border: 1px solid black;
+    float: right;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+.formulario select {
+    border: 1px solid black;
+    float: right;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+.formulario-radio label {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    float: left;
+    padding: 10px 10px 5px 10px;
+}
+
+.formulario-radio label:nth-child(2) {
+    float: right;
+}
+
+.formulario-radio input {
+    float: none;
+    width: initial;
+}
+
+.formulario textarea {
+    margin: 10px 0 10px 0;
+    width: 100%;
+}
+
+.formulario-login {
+    font-size: 12pt;
+    height: 28px;
+}
+
+.div-textarea {
+    text-align: center;
+}
+
+.div_submit {
+    text-align: center;
+}
+
+.submit {
+    background: #FFF;
+    border: 1px solid black;
+    float: none !important;
+    height: 40px;
+    margin: 0 auto;
+    width: 30%;
+}
+
+/* includes/usuario_logado.php */
+
+.usuario_logado {
+    background: #ebebeb;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 11pt;
+    margin: 50px auto 0 auto;
+    padding: 10px;
+    width: 40%;
+}
+
+.usuario_logado img {
+    float: left;
+    margin-right: 10px;
+}
+
+.logado_como {
+    color: #747474;
+    margin-bottom: 20px;
+}
