@@ -149,8 +149,103 @@ footer {
     padding: 10px;
 }
 
-.index-criar-conta-texto button:hover{
+.index-criar-conta-texto button:hover {
     background-color: #747474;
+}
+
+/* NOVO form_login.php*/
+
+.form-login {
+    font-family: var(--fonteTitulo);
+    width: 100%;
+}
+
+.formulario {
+    background: white;
+    border: 1px solid var(--corEscura);
+    border-radius: 5px;
+    margin: 75px auto 75px auto;
+    padding-top: 30px;
+    text-align: center;
+    width: 50%;
+}
+
+.formulario hr {
+    margin: 20px auto 20px auto;
+    width: 30%;
+}
+
+.formulario form {
+    margin: auto;
+    text-align: initial;
+    width: 80%;
+}
+
+.formulario-h3 {
+    text-align: center;
+}
+
+.formulario label {
+    float: left;
+}
+
+.formulario input {
+    border: 1px solid black;
+    border-radius: 2px;
+    float: right;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+.formulario select {
+    border: 1px solid black;
+    float: right;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+.formulario-radio label {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    float: left;
+    padding: 10px 10px 5px 10px;
+}
+
+.formulario-radio label:nth-child(2) {
+    float: right;
+}
+
+.formulario-radio input {
+    float: none;
+    width: initial;
+}
+
+.formulario textarea {
+    margin: 10px 0 10px 0;
+    width: 100%;
+}
+
+.formulario-login {
+    font-size: 12pt;
+    height: 28px;
+}
+
+.div-textarea {
+    text-align: center;
+}
+
+.div_submit {
+    text-align: center;
+}
+
+.submit {
+    background: #FFF;
+    border: 1px solid black;
+    float: none !important;
+    height: 40px;
+    margin: 0 auto;
+    width: 30%;
 }
 
 /* includes/conteudoindex.php */
@@ -211,98 +306,6 @@ a {
 .index-criar-conta a:hover {
     color: var(--corAzul);
     text-decoration: underline;
-}
-
-/* includes/form_cadastroprofissional.php */
-
-/* includes/form_cadastrorecrutador.php */
-
-/* includes/form_login.php */
-
-.formulario {
-    background: #ebebeb;
-    border-radius: 13px;
-    margin: 75px auto 75px auto;
-    padding-top: 30px;
-    text-align: center;
-    width: 50%;
-}
-
-.formulario hr {
-    margin: 20px auto 20px auto;
-    width: 30%;
-}
-
-.formulario form {
-    margin: auto;
-    text-align: initial;
-    width: 80%;
-}
-
-.formulario-h3 {
-    text-align: center;
-}
-
-.formulario label {
-    float: left;
-}
-
-.formulario input {
-    border: 1px solid black;
-    float: right;
-    margin-bottom: 10px;
-    width: 200px;
-}
-
-.formulario select {
-    border: 1px solid black;
-    float: right;
-    margin-bottom: 10px;
-    width: 200px;
-}
-
-.formulario-radio label {
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 5px;
-    float: left;
-    padding: 10px 10px 5px 10px;
-}
-
-.formulario-radio label:nth-child(2) {
-    float: right;
-}
-
-.formulario-radio input {
-    float: none;
-    width: initial;
-}
-
-.formulario textarea {
-    margin: 10px 0 10px 0;
-    width: 100%;
-}
-
-.formulario-login {
-    font-size: 12pt;
-    height: 28px;
-}
-
-.div-textarea {
-    text-align: center;
-}
-
-.div_submit {
-    text-align: center;
-}
-
-.submit {
-    background: #FFF;
-    border: 1px solid black;
-    float: none !important;
-    height: 40px;
-    margin: 0 auto;
-    width: 30%;
 }
 
 /* includes/usuario_logado.php */
