@@ -7,12 +7,12 @@
             <hr />
             <form method="POST">
                 <div>
-                    <label>E-mail</label>
-                    <input class="formulario-login" type="email" name="email" placeholder="Digite seu e-mail" autocomplete="off">
+                    <label>E-mail:</label><br/>
+                    <input class="formulario-login" type="email" name="email" placeholder="Requerido" autocomplete="off">
                     <div class="clear"></div>
                 </div>
                 <div>
-                    <label>Senha</label>
+                    <label>Senha:</label><br/>
                     <input class="formulario-login" type="password" name="senha" placeholder="Digite sua senha">
                     <div class="clear"></div>
                 </div>
@@ -21,14 +21,13 @@
                 <div class="formulario-h3">
                     <h3>Tipo de Conta</h3>
                 </div>
-                <hr />
                 <div class="formulario-radio">
                     <label>
-                        Conta Pessoa Física <input type="radio" name="tipo_conta" value="fisica" checked>
+                        Pessoa Física <input type="radio" name="tipo_conta" value="fisica" checked>
                     </label>
 
                     <label>
-                        Conta Pessoa Jurídica <input type="radio" name="tipo_conta" value="juridica">
+                        Pessoa Jurídica <input type="radio" name="tipo_conta" value="juridica">
                     </label>
                     <div class="clear"></div>
                 </div>
@@ -44,4 +43,5 @@
         <div class="clear"></div>
     </div>
 </div>
+<script>document.getElementsByTagName("body")[0].style.backgroundColor = "#EBEBEB"</script>
 <!-- Fim includes/from_login.php -->

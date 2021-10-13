@@ -1,4 +1,4 @@
-<!-- landpage.php -->
+<!-- conteudoIndex.php -->
 
 <main class="index-main">
     <section class="boas-vindas">
@@ -20,7 +20,7 @@
                         diversas oportunidades de trabalho, oferecidas por
                         uma variedade de empresas de vários ramos da tecnologia.
                     </p>
-                    <button onclick="window.location.href = '../cadastroprofissional.php'">
+                    <button onclick="window.location.href = 'cadastroprofissional.php'">
                         Criar conta de profissional
                     </button>
                 </div>
@@ -35,7 +35,7 @@
                         cadastrar e expor suas oportunidades de
                         trabalho para todos os usuários do site.
                     </p>
-                    <button onclick="window.location.href = '../cadastrorecrutador.php'">
+                    <button onclick="window.location.href = 'cadastrorecrutador.php'">
                         Criar conta de recrutador
                     </button>
                 </div>

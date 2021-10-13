@@ -26,9 +26,9 @@ if (!$mysqli->connect_error) {
      * Se existir, faz logout (opcional) e vai para index.php
      */
     if (!isset($_SESSION['login'])) {
-        require_once("includes/header.php");
-        require_once("includes/form_login.php");
-        require_once("includes/footer.php");
+        require_once "includes/header.php";
+        require_once "includes/form_login.php";
+        //require_once "footer.php";
 
         /**
          * Verifica o preenchimento do formulário
@@ -59,7 +59,13 @@ if (!$mysqli->connect_error) {
                     $_SESSION['login'] = $row['nome_pes'];
                     header("Location: index.php");
                 } else {
-                    die("Email e/ou senha inválido(s).");
+                    echo "
+                    <div class='container'>
+                        <section class='erro-login'>
+                            Erro: Email ou senha inválido(s).
+                        </section>
+                    </div>
+                    ";
                 }
             } else {
                 die ("Erro na execução da query: " . $mysqli->error);

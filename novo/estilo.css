@@ -5,11 +5,17 @@
     src: url(font/Montserrat/Montserrat-Medium.ttf) format('truetype');
 }
 
+@font-face {
+    font-family: 'Lato';
+    src: url(font/Lato/Lato-Regular.ttf);
+}
+
 :root {
     --corClara: #EBEBEB;
     --corEscura: #222;
     --corAzul: #0c2ea0;
     --fonteTitulo: 'Montserrat', 'Arial', 'Helvetica', sans-serif;
+    --fonteTexto: 'Lato', 'Times New Roman', serif;
 }
 
 * {
@@ -124,7 +130,7 @@ footer {
 .index-criar-conta-texto {
     color: var(--corEscura);
     float: left;
-    font-family: var(--fonteTitulo);
+    font-family: var(--fonteTexto);
     height: 620px;
     padding: 220px 100px 0 100px;
     text-align: center;
@@ -156,8 +162,12 @@ footer {
 /* NOVO form_login.php*/
 
 .form-login {
-    font-family: var(--fonteTitulo);
+    font-family: var(--fonteTexto);
     width: 100%;
+}
+
+.form-login h2{
+    font-family: var(--fonteTitulo);
 }
 
 .formulario {
@@ -167,12 +177,17 @@ footer {
     margin: 75px auto 75px auto;
     padding-top: 30px;
     text-align: center;
-    width: 50%;
+    width: 40%;
+}
+
+form input {
+    margin-top: 10px;
+    width: 100%;
 }
 
 .formulario hr {
     margin: 20px auto 20px auto;
-    width: 30%;
+    width: 100%;
 }
 
 .formulario form {
@@ -181,20 +196,19 @@ footer {
     width: 80%;
 }
 
-.formulario-h3 {
-    text-align: center;
+form h3{
+    font-family: var(--fonteTitulo);
 }
 
-.formulario label {
-    float: left;
+.formulario-h3 {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 .formulario input {
     border: 1px solid black;
     border-radius: 2px;
-    float: right;
     margin-bottom: 10px;
-    width: 200px;
 }
 
 .formulario select {
@@ -202,6 +216,10 @@ footer {
     float: right;
     margin-bottom: 10px;
     width: 200px;
+}
+
+.formulario-radio input{
+    margin: 5px 0px 10px 10px;
 }
 
 .formulario-radio label {
