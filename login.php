@@ -21,9 +21,17 @@ if (!$mysqli->connect_error) {
     session_start();
 
     /**
+     * Verifica se o comando de logout foi acionado
+     */
+    if ($_GET['logout'] == true) {
+        unset($_SESSION['login']);
+        session_destroy();
+    }
+
+    /**
      * Verifica se já existe sessão.
      * Se não existir, prossegue para o login
-     * Se existir, faz logout (opcional) e vai para index.php
+     * Se existir, vai para index.php
      */
     if (!isset($_SESSION['login'])) {
         require_once "includes/header.php";
@@ -72,10 +80,6 @@ if (!$mysqli->connect_error) {
             }
         }
     } else {
-        if (isset($_GET['logout'])) {
-            unset($_SESSION['login']);
-            session_destroy();
-        }
         header('Location: index.php');
     }
 } else {

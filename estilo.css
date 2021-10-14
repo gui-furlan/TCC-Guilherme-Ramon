@@ -41,7 +41,7 @@ body {
 header {
     background-color: black;
     /*border-bottom: 1px solid var(--corEscura);*/
-    font-family: var(--fonteTitulo);
+    font-family: var(--fonteTexto);
     padding: 20px 0px 20px 0;
     width: 100%;
 }
@@ -49,6 +49,7 @@ header {
 .header-logo {
     color: var(--corClara);
     float: left;
+    font-family: var(--fonteTitulo);
     text-decoration: none;
     width: 10%;
 }
@@ -161,15 +162,6 @@ footer {
 
 /* NOVO formularios*/
 
-.form-login {
-    font-family: var(--fonteTexto);
-    width: 100%;
-}
-
-.form-login h2{
-    font-family: var(--fonteTitulo);
-}
-
 .formulario {
     background: white;
     border: 1px solid var(--corEscura);
@@ -196,10 +188,6 @@ form input {
     width: 80%;
 }
 
-form h3{
-    font-family: var(--fonteTitulo);
-}
-
 .formulario-h3 {
     text-align: center;
     margin-bottom: 30px;
@@ -208,14 +196,17 @@ form h3{
 .formulario input {
     border: 1px solid black;
     border-radius: 2px;
+    font-size: 12pt;
     margin-bottom: 10px;
 }
 
-.formulario select {
-    border: 1px solid black;
-    float: right;
-    margin-bottom: 10px;
-    width: 200px;
+form select {
+    background-color: #FFF;
+    border: 1px solid var(--corEscura);
+    border-radius: 2px;
+    font-size: 12pt;
+    margin-top: 10px;
+    width: 10px;
 }
 
 .formulario-radio input{
@@ -244,11 +235,6 @@ form h3{
     width: 100%;
 }
 
-.formulario-login {
-    font-size: 12pt;
-    height: 28px;
-}
-
 .div-textarea {
     text-align: center;
 }
@@ -258,12 +244,17 @@ form h3{
 }
 
 .submit {
-    background: #FFF;
-    border: 1px solid black;
+    background: var(--corAzul);
+    border: 1px solid var(--corAzul);
+    color: var(--corClara);
     float: none !important;
     height: 40px;
     margin: 0 auto;
     width: 30%;
+}
+
+.submit:active{
+    background: #747474;
 }
 
 .erro-login {

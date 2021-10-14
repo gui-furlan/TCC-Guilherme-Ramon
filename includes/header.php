@@ -19,14 +19,17 @@
                 <h1>Logo</h1>
             </a>
             <?php
-            if ($_SESSION['login'] == $email) {
-                echo "<a class='header-login' href='login.php'>
-                        <h4>Fazer login</h4>
-                        </a>";
+            if (!isset($_SESSION['login'])) {
+                echo "
+                <a class='header-login' href='login.php'>
+                    Fazer login
+                </a>";
             } else {
-                echo "<a class='header-login' href='?logout=true'>
-                        <h4>Fazer logout (".$_SESSION['login']. ")</h4>
-                        </a>";
+                echo "
+                <a class='header-login' href='?logout=true'>
+                    Bem vindo ".$_SESSION['login'].". <span style='font-weight=bold'>Fazer logout</span>
+                </a>
+                ";
             }
             ?>
 

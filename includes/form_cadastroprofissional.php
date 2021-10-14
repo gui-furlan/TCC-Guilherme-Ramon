@@ -7,22 +7,22 @@
          <form method="POST">
              <div>
                  <label>Primeiro nome:</label>
-                 <input type="text" name="nome">
+                 <input type="text" name="nome" placeholder="Requerido">
                  <div class="clear"></div>
              </div>
              <div>
                  <label>Sobrenome:</label>
-                 <input type="text" name="sobrenome">
+                 <input type="text" name="sobrenome" placeholder="Requerido">
                  <div class="clear"></div>
              </div>
              <div>
                  <label>CPF:</label>
-                 <input type="text" name="cpf">
+                 <input type="text" name="cpf" placeholder="Requerido">
                  <div class="clear"></div>
              </div>
              <div>
                  <label>E-mail:</label>
-                 <input type="email" name="email">
+                 <input type="email" name="email" placeholder="Requerido">
                  <div class="clear"></div>
              </div>
              <div>
@@ -41,33 +41,32 @@
              </div>
              <div>
                  <!-- Sexo -->
-                 <label>Sexo:</label>
-                 <select name="sexo" style="float: right; width: 200px; border: 1px solid black">
+                 <label>Sexo:</label><br/>
+                 <select name="sexo" style="width: 100px; border: 1px solid black">
                     <option value="Feminino">Feminino</option>
                     <option value="Masculino">Masculino</option>
                  </select>
-                 <div class="clear"></div>
              </div>
              <hr/>
              <div>
                  <label>Unidade Federativa:</label>
-                 <input type="text" name="estado">
+                 <input type="text" name="estado" placeholder="Requerido">
                  <div class="clear"></div>
              </div>
              <div>
                  <label>Município:</label>
-                 <input type="text" name="municipio">
+                 <input type="text" name="municipio" placeholder="Requerido">
                  <div class="clear"></div>
              </div>
              <div>
                  <label>CEP:</label>
-                 <input type="text" name="cep">
+                 <input type="text" name="cep" placeholder="Requerido">
                  <div class="clear"></div>
              </div>
              <hr/>
              <div>
                  <label>Senha:</label>
-                 <input type="password" name="senha">
+                 <input type="password" name="senha" placeholder="Você usará esta senha para logar...">
                  <div class="clear"></div>
              </div>
              <hr/>
@@ -78,5 +77,7 @@
          </form>
      </section>
  </div>
- <!-- Fom form-cadastroprofissional.php -->
+ <script>document.getElementsByTagName("body")[0].style.backgroundColor = "#EBEBEB"</script>
+
+ <!-- Fim form-cadastroprofissional.php -->
  
