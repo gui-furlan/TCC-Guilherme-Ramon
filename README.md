@@ -10,6 +10,9 @@ Repositório para o TCC IFC Ibirama 2021
     * Problemas: a tabela Pessoa já está muito grande,
       mesmo faltando as informações de endereço.
 
+-> Ver atributos para identificar unicamente as pessoas e as oportunidades.
+    * Nickname & código das oportunidades
+
 --- "Restante do projeto" ---
 
 -> Fazer página principal:
