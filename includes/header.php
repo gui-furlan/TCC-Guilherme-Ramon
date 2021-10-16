@@ -1,4 +1,5 @@
 <?php
+    require_once "classes/PessoaFisica.php";
     session_start();
 ?>
 
@@ -19,7 +20,7 @@
                 <h1>Logo</h1>
             </a>
             <?php
-            if (!isset($_SESSION['login'])) {
+            if (!isset($_SESSION["login"])) {
                 echo "
                 <a class='header-login' href='login.php'>
                     Fazer login
@@ -27,7 +28,7 @@
             } else {
                 echo "
                 <a class='header-login' href='?logout=true'>
-                    Bem vindo ".$_SESSION['login'].". <span style='font-weight=bold'>Fazer logout</span>
+                    Bem vindo, <span style='font-weight:bolder; color: white'>".$_SESSION["login"]["username"]."</span>. Clique para fazer logout.
                 </a>
                 ";
             }

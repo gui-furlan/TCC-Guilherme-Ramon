@@ -65,6 +65,11 @@
              </div>
              <hr/>
              <div>
+                 <label>Nome de usuário:</label>
+                 <input type="text" name="username" placeholder="Isto lhe identificará na plataforma...">
+                 <div class="clear"></div>
+             </div>
+             <div>
                  <label>Senha:</label>
                  <input type="password" name="senha" placeholder="Você usará esta senha para logar...">
                  <div class="clear"></div>

@@ -1,5 +1,7 @@
 <?php
-
+error_reporting(E_ALL | E_STRICT);
+ini_set('display_errors', 'On');
+require_once "classes/PessoaFisica.php";
 /**
  * Conexão ao banco de dados
  */
@@ -7,7 +9,7 @@
 $servername = "localhost";
 $username = "guilherme";
 $password = "abc123";
-$dbname = "tcc1";
+$dbname = "tcc2";
 
 $mysqli = new mysqli($servername, $username, $password, $dbname);
 
@@ -18,9 +20,6 @@ $mysqli = new mysqli($servername, $username, $password, $dbname);
  */
 if (!$mysqli->connect_error) {
 
-    /**
-     * Inicia a sessão
-     */
     session_start();
 
     /**
@@ -44,42 +43,115 @@ if (!$mysqli->connect_error) {
         /**
          * Verifica o preenchimento do formulário
          * Se estiver preenchido, pega as informações do POST
+         * Se não, redireciona para o index.php
          */
-        if (isset($_POST['email']) && isset($_POST['senha'])) {
-            $formEmail = $_POST['email'];
+        if (isset($_POST['username']) && isset($_POST['senha']) && isset($_POST['tipo_conta'])) {
+            $formUsername = $_POST['username'];
             $formSenha = $_POST['senha'];
+            $formTipo = $_POST['tipo_conta'];
 
             /**
-             * Consultar no banco de dados
-             * 
-             * Constrói a query.
-             * Executa, atribui resultado à $result e verifica erros.
+             * Verifica o tipo da conta selecionado pelo usuário
              */
-            $query = "SELECT nome_pes FROM pessoa WHERE email_pes = '".$formEmail."' AND senha_pes = '".$formSenha."';";
-
-            // Verifica erro no momento da execução
-            if ($result = $mysqli->query($query)) { 
+            if ($formTipo == "f") {
 
                 /**
-                 * Verifica se obteve resultado único
-                 * Se sim, faz o login e redireciona para o index.php
-                 * Se não, lança erro
+                 * Se for "F" -> Pessoa Física
+                 * Cria uma query que busca a pessoa pelo username
+                 * Confere para ver se username e senha (e hash da senha) batem
+                 * Cria uma sessão contendo: username, nome, sobrenome, area e tipo de conta
                  */
-                if ($result->num_rows == 1) {
-                    $row = $result->fetch_assoc();
-                    $_SESSION['login'] = $row['nome_pes'];
-                    header("Location: index.php");
-                } else {
+                $query = "SELECT * FROM pessoa_fisica WHERE username_pf = '" . $formUsername . "';";
+
+                /**
+                 * Executa pra ver se existe alguém com esse username.
+                 * Se não existe, retorna o erro
+                 * Se existe, prossegue
+                 */
+                if (!$row = $mysqli->query($query)->fetch_assoc()) {
                     echo "
                     <div class='container'>
                         <section class='erro-login'>
-                            Erro: Email ou senha inválido(s).
+                            Erro: Username, senha ou tipo de conta inválido(s).
                         </section>
                     </div>
                     ";
+                } else {
+                    /**
+                     * Verifica se a senha informada bate com o hash da senha no banco
+                     * Se sim, cria a sessão.
+                     * Se não, retorna o erro
+                     */
+                    if ($formUsername == $row["username_pf"] && password_verify($formSenha, $row["senha_pf"])) {
+
+                        $_SESSION['login'] = [
+                            "username" => $row["username_pf"],
+                            "nome" => $row["nome_pf"],
+                            "sobrenome" => $row["sobrenome_pf"],
+                            "area" => $row["area_pf"],
+                            "tipo" => "F"
+                        ];
+                        //print_r($_SESSION["login"]);
+                        header("Location: index.php");
+                    } else {
+                        echo "
+                            <div class='container'>
+                                <section class='erro-login'>
+                                    Erro: Username, senha ou tipo de conta inválido(s).
+                                </section>
+                            </div>
+                        ";
+                    }
                 }
             } else {
-                die ("Erro na execução da query: " . $mysqli->error);
+                /**
+                 * Se for "J" -> Pessoa Jurídica
+                 * Cria uma query que busca a pessoa pelo username
+                 * Confere para ver se username e senha (e hash da senha) batem
+                 * Cria uma sessão contendo: username, nome, sobrenome (vazio neste caso), area e tipo de conta
+                 */
+                $query = "SELECT * FROM pessoa_juridica WHERE username_pj = '" . $formUsername . "';";
+
+                /**
+                 * Executa pra ver se existe alguém com esse username.
+                 * Se não existe, retorna o erro
+                 * Se existe, prossegue
+                 */
+                if (!$row = $mysqli->query($query)->fetch_assoc()) {
+                    echo "
+                    <div class='container'>
+                        <section class='erro-login'>
+                            Erro: Username, senha ou tipo de conta inválido(s).
+                        </section>
+                    </div>
+                    ";
+                } else {
+                    /**
+                     * Verifica se a senha informada bate com o hash da senha no banco
+                     * Se sim, cria a sessão.
+                     * Se não, retorna o erro
+                     */
+                    if ($formUsername == $row["username_pj"] && password_verify($formSenha, $row["senha_pj"])) {
+
+                        $_SESSION['login'] = [
+                            "username" => $row["username_pj"],
+                            "nome" => $row["nome_pf"],
+                            "sobrenome" => $row["sobrenome_pf"],
+                            "area" => $row["area_pf"],
+                            "tipo" => "F"
+                        ];
+                        //print_r($_SESSION["login"]);
+                        header("Location: index.php");
+                    } else {
+                        echo "
+                        <div class='container'>
+                            <section class='erro-login'>
+                                Erro: Username, senha ou tipo de conta inválido(s).
+                            </section>
+                        </div>
+                        ";
+                    }
+                }
             }
         }
     } else {

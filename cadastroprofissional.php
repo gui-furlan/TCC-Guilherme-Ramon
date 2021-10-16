@@ -7,7 +7,7 @@
 $servername = "localhost";
 $username = "guilherme";
 $password = "abc123";
-$dbname = "tcc1";
+$dbname = "tcc2";
 
 $mysqli = new mysqli($servername, $username, $password, $dbname);
 
@@ -26,7 +26,6 @@ if (!$mysqli->connect_error) {
     session_start();
 
     if (!isset($_SESSION['login'])) {
-        require_once "classes/Pessoa.php";
         require_once "classes/PessoaFisica.php";
 
         /**
@@ -35,15 +34,15 @@ if (!$mysqli->connect_error) {
          * Se não, carrega o formulário para preenchimento.
          */
         if (
-            isset($_POST['nome']) && isset($_POST['sobrenome']) && isset($_POST['cpf'])
+            isset($_POST["username"]) && isset($_POST['nome']) && isset($_POST['sobrenome']) && isset($_POST['cpf'])
             && isset($_POST['email']) && $_POST['nascimento'] != "" && isset($_POST['estado'])
             && isset($_POST['municipio']) && isset($_POST['cep']) && isset($_POST['senha'])
         ) {
 
             /**
-             * Instancia o objeto PessoaFisica
-             * com as informações do formulário
+             * Instancia variáveis com as informações do formulário
              */
+            $username = $_POST["username"];
             $nome = $_POST['nome'];
             $sobrenome = $_POST['sobrenome'];
             $cpf = $_POST['cpf'];
@@ -52,23 +51,10 @@ if (!$mysqli->connect_error) {
             $nascimento = $_POST['nascimento'];
             $sexo = $_POST['sexo'];
             $estado = $_POST['estado'];
-            $cidade = $_POST['municipio'];
+            $municipio = $_POST['municipio'];
             $cep = $_POST['cep'];
-            $senha = $_POST['senha'];
-
-            $pessoa = new PessoaFisica(
-                $nome,
-                $sobrenome,
-                $cpf,
-                $email,
-                $area,
-                $nascimento,
-                $sexo,
-                $estado,
-                $cidade,
-                $cep,
-                $senha
-            );
+            $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+            //Password Hash: gera um valor único criptografado para cada senha
 
             /**
              * Preparativos para o banco:
@@ -80,7 +66,6 @@ if (!$mysqli->connect_error) {
             } else {
                 $sexo = "M";
             }
-            $tipo = "F";
 
             /**
              * Cadastrar no banco:
@@ -90,13 +75,14 @@ if (!$mysqli->connect_error) {
              * Se executar, inicia uma sessão
              * Se der erro, lança erro =)
              */
-            $query = "INSERT INTO pessoa (nome_pes, sobrenome_pes, cpf_pes,
-                data_nasc_pes, sexo_pes, area_pes, email_pes, senha_pes, tipo_pes)
+            $query = "INSERT INTO pessoa_fisica (username_pf, nome_pf, sobrenome_pf, cpf_pf,
+                data_nascimento_pf, sexo_pf, area_pf, email_pf, senha_pf)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             if ($stmt = $mysqli->prepare($query)) {
                 $stmt->bind_param(
                     "sssssssss",
+                    $username,
                     $nome,
                     $sobrenome,
                     $cpf,
@@ -104,14 +90,21 @@ if (!$mysqli->connect_error) {
                     $sexo,
                     $area,
                     $email,
-                    $senha,
-                    $tipo
+                    $senha
                 );
 
                 if ($stmt->execute()) {
-                    $_SESSION['login'] = $nome;
+                    $_SESSION['login'] = [
+                        "username" => $username,
+                        "nome" => $nome,
+                        "sobrenome" => $sobrenome,
+                        "area" => $area,
+                        "tipo" => "F"
+                    ];
                     header("Location: index.php");
+                    //print_r($_SESSION['login']);
                 } else {
+                    $erro = true;
                     die("Erro na execução da query: " . $mysqli->error);
                 }
             } else {

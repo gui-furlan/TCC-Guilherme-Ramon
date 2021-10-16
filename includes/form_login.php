@@ -6,8 +6,8 @@
         <hr />
         <form method="POST">
             <div>
-                <label>E-mail:</label><br />
-                <input class="formulario-login" type="email" name="email" placeholder="Requerido" autocomplete="off">
+                <label>Nome de usuário:</label><br />
+                <input class="formulario-login" type="text" name="username" placeholder="Requerido">
                 <div class="clear"></div>
             </div>
             <div>
@@ -22,11 +22,11 @@
             </div>
             <div class="formulario-radio">
                 <label>
-                    Pessoa Física <input type="radio" name="tipo_conta" value="fisica" checked>
+                    Pessoa Física <input type="radio" name="tipo_conta" value="f" checked>
                 </label>
 
                 <label>
-                    Pessoa Jurídica <input type="radio" name="tipo_conta" value="juridica">
+                    Pessoa Jurídica <input type="radio" name="tipo_conta" value="j">
                 </label>
                 <div class="clear"></div>
             </div>

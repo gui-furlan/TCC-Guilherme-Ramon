@@ -8,8 +8,8 @@ class PessoaFisica extends Pessoa {
     private $nascimento;
     private $sexo;
 
-    public function __construct($nome, $area, $email, $senha, $cidade, $estado, $cep, $sobrenome, $cpf, $nascimento, $sexo) {
-        parent::__construct($nome, $area, $email, $senha, $cidade, $estado, $cep);
+    public function __construct($nome, $area, $email, $senha, $municipio, $estado, $cep, $sobrenome, $cpf, $nascimento, $sexo) {
+        parent::__construct($nome, $area, $email, $senha, $municipio, $estado, $cep);
         $this->sobrenome = $sobrenome;
         $this->cpf = $cpf;
         $this->nascimento = $nascimento;

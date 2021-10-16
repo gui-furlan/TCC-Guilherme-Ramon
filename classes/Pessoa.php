@@ -10,13 +10,13 @@ class Pessoa {
     private $estado;
     private $cep;
 
-    public function __construct($nome, $area, $email, $senha, $cidade, $estado, $cep) {
+    public function __construct($nome, $area, $email, $senha, $municipio, $estado, $cep) {
         $this->nome = $nome;
         $this->area = $area;
         $this->email = $email;
         $this->senha = $senha;
         $this->bio = "";
-        $this->cidade = $cidade;
+        $this->municipio = $municipio;
         $this->estado = $estado;
         $this->cep = $cep;
     }
