@@ -7,7 +7,7 @@
 $servername = "localhost";
 $username = "guilherme";
 $password = "abc123";
-$dbname = "tcc1";
+$dbname = "tcc2";
 
 $mysqli = new mysqli($servername, $username, $password, $dbname);
 
@@ -25,50 +25,33 @@ if (!$mysqli->connect_error) {
      */
     session_start();
 
-    if (!isset($_SESSION['login'])) {
-        require_once "classes/Pessoa.php";
-        require_once "classes/PessoaJuridica.php";
+    if (!isset($_SESSION["login"])) {
 
         /**
          * Verifica se o formulário está preenchido.
          * Se estiver, prossegue para o cadastro no banco.
          * Se não, carrega o formulário para preenchimento.
          */
-         
+        
         if (
-            isset($_POST['nome']) && isset($_POST['cnpj']) && isset($_POST['email']) 
-             && isset($_POST['estado']) && isset($_POST['municipio']) && isset($_POST['cep']) && isset($_POST['senha'])
+            isset($_POST['username']) && isset($_POST['nome']) && isset($_POST['cnpj'])
+            && isset($_POST['email']) && isset($_POST['estado']) && isset($_POST['municipio'])
+            && isset($_POST['cep']) && isset($_POST['senha'])
         ) {
 
             /**
-             * Instancia o objeto PessoaFisica
-             * com as informações do formulário
+             * Instancia variáveis com as informações do formulário
              */
+            $username = $_POST['username'];
             $nome = $_POST['nome'];
-            $cnpj = $_POST['cnpj'];
+            $cpf = $_POST['cnpj'];
             $email = $_POST['email'];
             $area = $_POST['area'];
             $estado = $_POST['estado'];
-            $cidade = $_POST['municipio'];
+            $municipio = $_POST['municipio'];
             $cep = $_POST['cep'];
-            $senha = $_POST['senha'];
-
-            $pessoa = new PessoaJuridica(
-                $nome,
-                $cnpj,
-                $email,
-                $area,
-                $estado,
-                $cidade,
-                $cep,
-                $senha
-            );
-
-            /**
-             * Preparativos para o banco:
-             * Tipo atribuído como F (apenas banco).
-             **/
-            $tipo = "J";
+            $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+            //Password Hash: gera um valor único criptografado para cada senha
 
             /**
              * Cadastrar no banco:
@@ -78,24 +61,33 @@ if (!$mysqli->connect_error) {
              * Se executar, inicia uma sessão
              * Se der erro, lança erro =)
              */
-            $query = "INSERT INTO pessoa (nome_pes, cnpj_pes,
-                area_pes, email_pes, senha_pes, tipo_pes)
-                VALUES (?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO pessoa_juridica (username_pj, nome_pj, cnpj_pj,
+                area_pj, municipio_pj, estado_pj, email_pj, senha_pj)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             if ($stmt = $mysqli->prepare($query)) {
                 $stmt->bind_param(
-                    "ssssss",
+                    "ssssssss",
+                    $username,
                     $nome,
                     $cnpj,
                     $area,
+                    $municipio,
+                    $estado,
                     $email,
-                    $senha,
-                    $tipo
+                    $senha
                 );
 
                 if ($stmt->execute()) {
-                    $_SESSION['login'] = $nome;
+                    $_SESSION['login'] = [
+                        "username" => $username,
+                        "nome" => $nome,
+                        "sobrenome" => "",
+                        "area" => $area,
+                        "tipo" => "J"
+                    ];
                     header("Location: index.php");
+                    //print_r($_SESSION['login']);
                 } else {
                     die("Erro na execução da query: " . $mysqli->error);
                 }

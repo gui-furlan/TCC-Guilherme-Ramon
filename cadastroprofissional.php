@@ -25,8 +25,7 @@ if (!$mysqli->connect_error) {
      */
     session_start();
 
-    if (!isset($_SESSION['login'])) {
-        require_once "classes/PessoaFisica.php";
+    if (!isset($_SESSION["login"])) {
 
         /**
          * Verifica se o formulário está preenchido.
@@ -34,7 +33,7 @@ if (!$mysqli->connect_error) {
          * Se não, carrega o formulário para preenchimento.
          */
         if (
-            isset($_POST["username"]) && isset($_POST['nome']) && isset($_POST['sobrenome']) && isset($_POST['cpf'])
+            isset($_POST['username']) && isset($_POST['nome']) && isset($_POST['sobrenome']) && isset($_POST['cpf'])
             && isset($_POST['email']) && $_POST['nascimento'] != "" && isset($_POST['estado'])
             && isset($_POST['municipio']) && isset($_POST['cep']) && isset($_POST['senha'])
         ) {
@@ -42,7 +41,7 @@ if (!$mysqli->connect_error) {
             /**
              * Instancia variáveis com as informações do formulário
              */
-            $username = $_POST["username"];
+            $username = $_POST['username'];
             $nome = $_POST['nome'];
             $sobrenome = $_POST['sobrenome'];
             $cpf = $_POST['cpf'];
@@ -59,7 +58,6 @@ if (!$mysqli->connect_error) {
             /**
              * Preparativos para o banco:
              * Sexo cadastrado como M ou F.
-             * Tipo atribuído como F (apenas banco).
              **/
             if ($sexo == "Feminino") {
                 $sexo = "F";
@@ -76,8 +74,8 @@ if (!$mysqli->connect_error) {
              * Se der erro, lança erro =)
              */
             $query = "INSERT INTO pessoa_fisica (username_pf, nome_pf, sobrenome_pf, cpf_pf,
-                data_nascimento_pf, sexo_pf, area_pf, email_pf, senha_pf)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                data_nascimento_pf, sexo_pf, area_pf, municipio_pf, estado_pf, email_pf, senha_pf)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             if ($stmt = $mysqli->prepare($query)) {
                 $stmt->bind_param(
@@ -89,6 +87,8 @@ if (!$mysqli->connect_error) {
                     $nascimento,
                     $sexo,
                     $area,
+                    $municipio,
+                    $estado,
                     $email,
                     $senha
                 );
@@ -104,7 +104,6 @@ if (!$mysqli->connect_error) {
                     header("Location: index.php");
                     //print_r($_SESSION['login']);
                 } else {
-                    $erro = true;
                     die("Erro na execução da query: " . $mysqli->error);
                 }
             } else {
