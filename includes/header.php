@@ -1,5 +1,4 @@
 <?php
-    require_once "classes/PessoaFisica.php";
     session_start();
 ?>
 

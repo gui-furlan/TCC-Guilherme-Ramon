@@ -1,7 +1,5 @@
 <?php
-error_reporting(E_ALL | E_STRICT);
-ini_set('display_errors', 'On');
-require_once "classes/PessoaFisica.php";
+
 /**
  * Conexão ao banco de dados
  */
@@ -23,22 +21,11 @@ if (!$mysqli->connect_error) {
     session_start();
 
     /**
-     * Verifica se o comando de logout foi acionado
-     */
-    if ($_GET['logout'] == true) {
-        unset($_SESSION['login']);
-        session_destroy();
-    }
-
-    /**
      * Verifica se já existe sessão.
      * Se não existir, prossegue para o login
      * Se existir, vai para index.php
      */
     if (!isset($_SESSION['login'])) {
-        require_once "includes/header.php";
-        require_once "includes/form_login.php";
-        //require_once "footer.php";
 
         /**
          * Verifica o preenchimento do formulário
@@ -61,7 +48,7 @@ if (!$mysqli->connect_error) {
                  * Confere para ver se username e senha (e hash da senha) batem
                  * Cria uma sessão contendo: username, nome, sobrenome, area e tipo de conta
                  */
-                $query = "SELECT * FROM pessoa_fisica WHERE username_pf = '" . $formUsername . "';";
+                $query = "SELECT * FROM pessoa_fisica WHERE username_pf = '$formUsername';";
 
                 /**
                  * Executa pra ver se existe alguém com esse username.
@@ -69,13 +56,7 @@ if (!$mysqli->connect_error) {
                  * Se existe, prossegue
                  */
                 if (!$row = $mysqli->query($query)->fetch_assoc()) {
-                    echo "
-                    <div class='container'>
-                        <section class='erro-login'>
-                            Erro: Username, senha ou tipo de conta inválido(s).
-                        </section>
-                    </div>
-                    ";
+                    $erro = "Username, senha ou tipo de conta inválido(s)";
                 } else {
                     /**
                      * Verifica se a senha informada bate com o hash da senha no banco
@@ -84,7 +65,7 @@ if (!$mysqli->connect_error) {
                      */
                     if ($formUsername == $row["username_pf"] && password_verify($formSenha, $row["senha_pf"])) {
 
-                        $_SESSION['login'] = [
+                        $_SESSION["login"] = [
                             "username" => $row["username_pf"],
                             "nome" => $row["nome_pf"],
                             "sobrenome" => $row["sobrenome_pf"],
@@ -93,14 +74,9 @@ if (!$mysqli->connect_error) {
                         ];
                         //print_r($_SESSION["login"]);
                         header("Location: index.php");
+                        die();
                     } else {
-                        echo "
-                            <div class='container'>
-                                <section class='erro-login'>
-                                    Erro: Username, senha ou tipo de conta inválido(s).
-                                </section>
-                            </div>
-                        ";
+                        $erro = "Username, senha ou tipo de conta inválido(s)";
                     }
                 }
             } else {
@@ -110,7 +86,7 @@ if (!$mysqli->connect_error) {
                  * Confere para ver se username e senha (e hash da senha) batem
                  * Cria uma sessão contendo: username, nome, sobrenome (vazio neste caso), area e tipo de conta
                  */
-                $query = "SELECT * FROM pessoa_juridica WHERE username_pj = '" . $formUsername . "';";
+                $query = "SELECT * FROM pessoa_juridica WHERE username_pj = '$formUsername';";
 
                 /**
                  * Executa pra ver se existe alguém com esse username.
@@ -118,13 +94,7 @@ if (!$mysqli->connect_error) {
                  * Se existe, prossegue
                  */
                 if (!$row = $mysqli->query($query)->fetch_assoc()) {
-                    echo "
-                    <div class='container'>
-                        <section class='erro-login'>
-                            Erro: Username, senha ou tipo de conta inválido(s).
-                        </section>
-                    </div>
-                    ";
+                    $erro = "Username, senha ou tipo de conta inválido(s)";
                 } else {
                     /**
                      * Verifica se a senha informada bate com o hash da senha no banco
@@ -133,32 +103,40 @@ if (!$mysqli->connect_error) {
                      */
                     if ($formUsername == $row["username_pj"] && password_verify($formSenha, $row["senha_pj"])) {
 
-                        $_SESSION['login'] = [
+                        $_SESSION["login"] = [
                             "username" => $row["username_pj"],
-                            "nome" => $row["nome_pf"],
-                            "sobrenome" => $row["sobrenome_pf"],
-                            "area" => $row["area_pf"],
-                            "tipo" => "F"
+                            "nome" => $row["nome_pj"],
+                            "sobrenome" => $row["sobrenome_pj"],
+                            "area" => $row["area_pj"],
+                            "tipo" => "J"
                         ];
                         //print_r($_SESSION["login"]);
                         header("Location: index.php");
+                        die();
                     } else {
-                        echo "
-                        <div class='container'>
-                            <section class='erro-login'>
-                                Erro: Username, senha ou tipo de conta inválido(s).
-                            </section>
-                        </div>
-                        ";
+                        $erro = "Username, senha ou tipo de conta inválido(s)";
                     }
                 }
             }
         }
     } else {
         header('Location: index.php');
+        die();
     }
 } else {
     die("Não foi possível conectar ao banco de dados: " . $mysqli->connect_error);
 }
 
+require_once "includes/header.php";
+        //Mensagem de erro (somente se existir :D )
+        if (isset($erro)) {
+            echo "
+                <div class='container'>
+                    <section class='erro-login-cadastro'>
+                        Erro: $erro
+                    </section>
+                </div>
+            ";
+        }
+        require_once "includes/form_login.php";
 $mysqli->close();
