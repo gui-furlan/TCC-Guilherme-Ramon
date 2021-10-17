@@ -1,21 +1,27 @@
+
 <!-- painel.php -->
 
+<?php
+    include "includes/usuario_logado.php";
+    if ($_SESSION["login"]["tipo"] == "J") {
+        //include alguma coisa
+    }
+?>
+
+
 <div class="container">
-    <section class="usuario_logado">
-        <div>
-            <img src="./img/default_user.jpg" width="100px">
-            <div>
-                <p class="logado_como">Logado como:</p>
-                <h3 class="nome_perfil"><?php echo $_SESSION["login"]["nome"]; echo " ".$_SESSION["login"]["sobrenome"] ?></h3>
-                <p class="area_perfil"><?= $_SESSION["login"]["area"] ?></p>
-                <a class="editar_perfil" href="">Editar perfil</a>
-            </div>
-            <div class="clear"></div>
-        </div>
+    <section class="form-pesquisa">
+        <form>
+            <input type="submit" value="Pesquisar">
+            <input type="text" name="pesquisa">
+        </form>
+    </section>
+    <div class="clear"></div>
+
+    <section class="resultados">
+
     </section>
 </div>
-<section>
 
-</section>
-
+<script>document.getElementsByTagName("body")[0].style.backgroundColor="#EBEBEB";document.getElementsByTagName("header")[0].style.borderBottom="2px solid var(--corAzul)"</script>
 <!-- fim painel.php -->
