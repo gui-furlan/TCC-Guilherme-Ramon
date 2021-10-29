@@ -138,5 +138,5 @@ require_once "includes/header.php";
                 </div>
             ";
         }
-        require_once "includes/form_login.php";
+        require_once "includes/form_login.html";
 $mysqli->close();

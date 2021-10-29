@@ -12,7 +12,7 @@ include "includes/header.php";
 if(isset($_SESSION['login'])) {
     include "includes/painel.php";
 } else {
-    include "includes/landpage.php";
+    include "includes/landpage.html";
 }
 
-include "includes/footer.php";
+include "includes/footer.html";

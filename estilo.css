@@ -278,7 +278,7 @@ form select {
 /* includes/usuario_logado.php */
 
 .usuario-logado {
-    background: #ebebeb;
+    background: white;
     border: 1px solid black;
     border-radius: 5px;
     font-family: var(--fonteTexto);
@@ -317,6 +317,7 @@ form select {
     background-color: var(--corAzul);
     border: 0;
     color: var(--corClara);
+    cursor: pointer;
     float: left;
     font-family: var(--fonteTexto);
     font-size: 12pt;
@@ -326,6 +327,10 @@ form select {
     width: 15%;
 }
 
+.form-pesquisa input[type="submit"]:active {
+    background-color: #747474;
+}
+
 .form-pesquisa input[type="text"] {
     float: right;
     height: 30px;
@@ -333,4 +338,32 @@ form select {
     font-size: 13pt;
     margin: 0;
     width: 84%;
+}
+
+/* includes/botoes-juridico.html */
+
+.botoes-juridico {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.botoes-juridico a {
+    text-decoration: none;
+}
+
+.botoes-juridico button {
+    background: white;
+    border: 1px solid var(--corEscura);
+    border-radius: 5px;
+    color: var(--corEscura);
+    cursor: pointer;
+    float: none !important;
+    font-size: 13pt;
+    height: 40px;
+    text-decoration: none;
+    width: 30%;
+}
+
+.botoes-juridico button:active {
+    background: #747474;
 }
