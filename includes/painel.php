@@ -2,12 +2,27 @@
 <!-- Painel -->
 
 <?php
-    include "includes/usuario_logado.php";
+    /**
+     * Chama a caixa com as informações de usuário logado
+     */
+    require "includes/usuario_logado.php";
+    
+    /**
+     * Se for jurídico, chama os botoẽs "Minhas Oportunidades" e "Cadastrar Oportunidade"
+     */
     if ($_SESSION["login"]["tipo"] == "J") {
-        //include os botões de cadastro de oportunidade e gerenciamento de oportunidade ("Ver vagas" ou algo assim)
         include "includes/botoes_juridico.html";
     }
+
+    /**
+     * Chama a barra de busca  
+     */ 
     include "form_pesquisa.html";
+
+    /**
+     * Chama os resultados
+     */ 
+    include "includes/resultados.php";
 
 ?>
 
