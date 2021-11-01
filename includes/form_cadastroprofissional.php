@@ -28,7 +28,7 @@
              <div>
                  <!-- Área de atuação de destaque -->
                  <?php
-                    include("select-area-atuacao.php");
+                    include("select-area-atuacao.html");
                  ?>
                  <div class="clear"></div>
              </div>

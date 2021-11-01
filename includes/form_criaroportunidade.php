@@ -10,17 +10,21 @@
     <section class="formulario">
         <h1>Cadastrar uma oportunidade</h1>
         <hr />
-        <form action="POST">
+        <form method="POST">
+            <div>
+                <label>Título:</label>
+                <input type="text" name="titulo" maxlength="255">
+            </div>
             <div>
                 <!-- Área de atuação -->
                 <?php
-                include("includes/select-area-atuacao.php");
+                include("includes/select-area-atuacao.html");
                 ?>
                 <div class="clear"></div>
             </div>
             <div>
                 <label>Tipo do trabalho: </label>
-                <select id="tipo-trabalho" style="float: right; width: 200px; border: 1px solid black">
+                <select name="tipo_trabalho" style="width: 100%; border: 1px solid black">
                     <option value="Efetivo">Efetivo</option>
                     <option value="Estágio">Estágio</option>
                     <option value="Freelance">Freelance</option>
@@ -29,43 +33,38 @@
             </div>
             <div>
                 <label>Local: </label>
-                <select id="local" style="float: right; width: 200px; border: 1px solid black">
+                <select name="local" style="width: 100%; border: 1px solid black">
                     <option value="Home office">Home office</option>
-                    <option value="Presencial (endereço da empresa)">Presencial (endereço da empresa)</option>
+                    <option value="Presencial">Presencial (endereço da empresa)</option>
                 </select>
                 <div class="clear"></div>
             </div>
             <div>
                 <label>Número de vagas: </label>
-                <input type="number" name="n_vagas">
-                <div class="clear"></div>
+                <input type="number" name="n_vagas" max="100">
             </div>
             <div>
                 <label>Faixa salarial: </label>
-                <input type="number" name="faixa_salarial">
-                <div class="clear"></div>
+                <input type="number" name="faixa_salarial" max="50000">
             </div>
             <hr />
             <div>
                 <label>Descreva brevemente sua oportunidade: </label>
                 <div class="div-textarea">
-                    <textarea rows="2"></textarea>
+                    <textarea name="descricao" rows="3" maxlength="700"></textarea>
                 </div>
-                <div class="clear"></div>
             </div>
             <div>
                 <label>Descreva brevemente os requisitos do profissional procurado: </label>
                 <div class="div-textarea">
-                    <textarea rows="2"></textarea>
+                    <textarea name="requisitos" rows="3" maxlength="700"></textarea>
                 </div>
-                <div class="clear"></div>
             </div>
             <hr />
             <div>
                 <div class="div_submit">
                     <input type="submit" class="submit">
                 </div>
-                <div class="clear"></div>
             </div>
         </form>
     </section>

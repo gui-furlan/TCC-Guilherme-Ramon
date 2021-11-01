@@ -1,5 +1,11 @@
 <?php
     session_start();
+    if($_GET["logout"] == true) {
+        unset($_SESSION['login']);
+        session_destroy();
+        header("Location: index.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>

@@ -3,13 +3,7 @@
 /**
  * Conexão ao banco de dados
  */
-
-$servername = "localhost";
-$username = "guilherme";
-$password = "abc123";
-$dbname = "tcc2";
-
-$mysqli = new mysqli($servername, $username, $password, $dbname);
+require_once "conexao.php";
 
 /**
  * Verifica erros de conexão com o banco.
@@ -128,15 +122,16 @@ if (!$mysqli->connect_error) {
 }
 
 require_once "includes/header.php";
-        //Mensagem de erro (somente se existir :D )
-        if (isset($erro)) {
-            echo "
+//Mensagem de erro (somente se existir :D )
+if (isset($erro)) {
+    echo "
                 <div class='container'>
                     <section class='erro-login-cadastro'>
                         Erro: $erro
                     </section>
                 </div>
             ";
-        }
-        require_once "includes/form_login.html";
+}
+require_once "includes/form_login.html";
+
 $mysqli->close();

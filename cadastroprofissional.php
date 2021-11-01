@@ -3,13 +3,7 @@
 /**
  * Conexão ao banco de dados.
  */
-
-$servername = "localhost";
-$username = "guilherme";
-$password = "abc123";
-$dbname = "tcc2";
-
-$mysqli = new mysqli($servername, $username, $password, $dbname);
+require_once "conexao.php";
 
 /**
  * Verifica a conexão.
