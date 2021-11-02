@@ -154,5 +154,5 @@ if (isset($erro)) {
 }
 
 include "includes/form_cadastroprofissional.php";
-include "includes/footer.php";
+include "includes/footer.html";
 $mysqli->close();

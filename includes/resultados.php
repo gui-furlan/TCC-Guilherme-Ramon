@@ -32,8 +32,13 @@
                      * - Cada $row recebe um fetch de $result
                      * - $i incrementa a cada iteração
                      */
-                    if (!$result = $mysqli->query($query)) {
-                        echo "<pre style='text-align:center'>Não existem oportunidades cadastradas ainda :D</pre>";
+                    $result = $mysqli->query($query);
+                    if ($result->num_rows == 0) {
+                        echo "
+                            <div class='info'>
+                                <p>Não existem registros no momento. Tente novamente mais tarde =D</p>
+                            </div>
+                        ";
                     } else {
                         $i = 1;
                         while ($row = $result->fetch_assoc()) {

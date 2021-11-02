@@ -124,6 +124,7 @@ if (
     echo "</pre>";
 
 }
+
 include("includes/header.php");
 include("includes/form_criaroportunidade.php");
 include("includes/footer.html");
