@@ -394,7 +394,6 @@ form select {
     color: var(--corEscura);
     font-family: var(--fonteTexto);
     margin-top: 30px;
-    height: 100px;
     width: 100%;
 }
 
@@ -402,4 +401,55 @@ form select {
     font-family: var(--fonteTitulo);
     padding: 10px;
     text-align: center;
+}
+
+.oportunidade {
+    float:left;
+    width: 100%;
+}
+
+.oportunidade .imagem {
+    float: left;
+    padding: 30px;
+}
+
+.oportunidade .imagem img {
+    border: 1px solid black;
+    width: 100px;
+}
+
+.oportunidade .info {
+    float: left;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 160px;
+    padding: 30px 0 30px 0;
+    text-align: left;
+    width: 80%;
+}
+
+.oportunidade .info .titulo-vaga {
+    margin-top: 5px;
+    font-size: 15pt;
+}
+
+.oportunidade .info .empresa {
+    color: black;
+    margin-top: 3px;
+    opacity: 80%;
+    text-decoration: none;
+}
+
+.oportunidade .info .empresa:hover {
+    color: var(--corMedia);
+}
+
+.oportunidade .info .contrato-local {
+    font-size: 15pt;
+    margin-top: 10px;
+}
+
+.oportunidade hr {
+    border: 1px solid black;
+    margin: 0px;
+    width: 100%;
 }
