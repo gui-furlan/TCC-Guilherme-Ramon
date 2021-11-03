@@ -428,8 +428,14 @@ form select {
 }
 
 .oportunidade .info .titulo-vaga {
+    color: black;
     margin-top: 5px;
-    font-size: 15pt;
+    font-size: 16pt;
+    text-decoration: none;
+}
+
+.oportunidade .info .titulo-vaga:hover {
+    color: var(--corMedia);
 }
 
 .oportunidade .info .empresa {

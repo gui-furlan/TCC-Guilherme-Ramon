@@ -53,7 +53,7 @@
                                         <img src='img/default_user.jpg'>
                                     </div>
                                     <div class='info'>
-                                        <p class='titulo-vaga'>" . $row["titulo_opo"] . "</p>
+                                        <a class='titulo-vaga' href=''>" . $row["titulo_opo"] . "</a><br/>
                                         <a class='empresa' href=''>" . $row["nome_pj"] . "</a>
                                         <p class='contrato-local'>" . $row["contrato_opo"] . " - " . $row["local_opo"] . "</p>
                                     </div>

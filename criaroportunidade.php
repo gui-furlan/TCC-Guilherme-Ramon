@@ -1,8 +1,5 @@
 <?php
 
-ini_set('error_reporting', E_ALL); // mesmo resultado de: error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 /**
  * Conexão com o banco de dados, verificando erros
  * Se tiver erro, lança erro e para a execução

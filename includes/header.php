@@ -1,11 +1,13 @@
 <?php
-    session_start();
-    if($_GET["logout"] == true) {
-        unset($_SESSION['login']);
-        session_destroy();
-        header("Location: index.php");
-        exit;
-    }
+ini_set('error_reporting', E_ALL); // mesmo resultado de: error_reporting(E_ALL);
+ini_set('display_errors', 1);
+//session_start();
+if (isset($_GET["logout"])) {
+    unset($_SESSION['login']);
+    session_destroy();
+    header("Location: index.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +36,7 @@
             } else {
                 echo "
                 <a class='header-login' href='?logout=true'>
-                    Bem vindo, <span style='font-weight:bolder; color: white'>".$_SESSION["login"]["username"]."</span>. Clique para fazer logout.
+                    Bem vindo, <span style='font-weight:bolder; color: white'>" . $_SESSION["login"]["username"] . "</span>. Clique para fazer logout.
                 </a>
                 ";
             }
@@ -45,3 +47,4 @@
     </header>
 
     <!-- Fim do Cabeçalho -->
+    
