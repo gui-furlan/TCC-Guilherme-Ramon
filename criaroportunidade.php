@@ -60,7 +60,7 @@ if (
 
     /**
      * Cria o código da oportunidade utilizando a data e hora do sistema
-     * No formato "YmdHis" + um int random entre 0 e 9
+     * Formato "YmdHis" com um inteiro pseudo-randômico entre 0 e 9
      * Retorna um ano (4 dígitos), mês (2 díg.), dia do mês (2 díg.),
      * ... hora (2 díg. formato 24 hrs), minutos (2 díg.) e segundos (2 díg.)
      */
@@ -106,19 +106,18 @@ if (
         }
     }
 
-    //Teste pra ver se tá pegando tudo certinho
-    echo "<pre>";
-    var_dump($pk);
-    var_dump($codigo);
-    var_dump($_POST["titulo"]);
-    var_dump($_POST["area"]);
-    var_dump($_POST["tipo_trabalho"]);
-    var_dump($local);
-    var_dump($_POST["n_vagas"]);
-    var_dump($_POST["faixa_salarial"]);
-    var_dump($_POST["descricao"]);
-    var_dump($_POST["requisitos"]);
-    echo "</pre>";
+    // echo "<pre>";
+    // var_dump($pk);
+    // var_dump($codigo);
+    // var_dump($_POST["titulo"]);
+    // var_dump($_POST["area"]);
+    // var_dump($_POST["tipo_trabalho"]);
+    // var_dump($local);
+    // var_dump($_POST["n_vagas"]);
+    // var_dump($_POST["faixa_salarial"]);
+    // var_dump($_POST["descricao"]);
+    // var_dump($_POST["requisitos"]);
+    // echo "</pre>";
 
 }
 

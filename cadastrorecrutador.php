@@ -91,7 +91,7 @@ if (!$mysqli->connect_error) {
         } else {
             include "includes/header.php";
             include "includes/form_cadastrorecrutador.php";
-            include "includes/footer.php";
+            include "includes/footer.html";
         }
     } else {
         header("Location: index.php");

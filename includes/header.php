@@ -47,4 +47,3 @@ if (isset($_GET["logout"])) {
     </header>
 
     <!-- Fim do Cabeçalho -->
-    

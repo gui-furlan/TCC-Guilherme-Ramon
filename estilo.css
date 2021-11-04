@@ -291,7 +291,7 @@ form select {
     border-radius: 5px;
     font-family: var(--fonteTexto);
     font-size: 11pt;
-    margin: 30px auto 10px auto;
+    margin: 30px auto 0px auto;
     padding: 10px;
     width: 50.2%;
 }
@@ -314,6 +314,7 @@ form select {
     border-radius: 5px;
     float: left;
     font-family: var(--fonteTexto);
+    margin-top: 30px;
     padding: 15px;
     width: 100%;
 }
@@ -360,7 +361,6 @@ form select {
 /* includes/botoes-juridico.html */
 
 .botoes-juridico {
-    margin-bottom: 30px;
     text-align: center;
 }
 
@@ -377,6 +377,7 @@ form select {
     float: none !important;
     font-size: 13pt;
     height: 40px;
+    margin-top: 10px;
     text-decoration: none;
     width: 25%;
 }
@@ -458,4 +459,97 @@ form select {
     border: 1px solid black;
     margin: 0px;
     width: 100%;
+}
+
+/* VISUALIZAR OPORTUNIDADE */
+
+.view {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    width: 100%;
+}
+
+.titulo-view {
+    padding: 10px;
+    width: 100%;
+}
+
+.conteudo-view {
+    float: left;
+    width: 100%;
+}
+
+.descricao-view {
+    float: left;
+    padding: 30px;
+    width: 59%;
+}
+
+.descricao-view p {
+    margin-bottom: 30px;
+}
+
+.empresa-view {
+    float: left;
+    padding: 30px;
+    width: 40%;
+}
+
+.empresa-view img {
+    border: 1px solid var(--corMedia);
+}
+
+.empresa-view .nome-empresa {
+    margin: 10px 0 10px 0;
+}
+
+.empresa-view a {
+    color: inherit;
+}
+
+.empresa-view a:hover{
+    color: var(--corMedia);
+}
+
+.botoes-view {
+    padding: 10px;
+}
+
+.botoes-view button {
+    background-color: var(--corAzul);
+    border: 1px solid var(--corEscura);
+    color: white;
+    font-family: var(--fonteTexto);
+    font-size: 13pt;
+    padding: 10px;
+}
+
+.botoes-view button:nth-child(1){
+    margin-right: 30px;
+}
+
+.botoes-view button a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.botoes-view .candidatar {
+    background-color: var(--corAzul);
+}
+
+.botoes-view button:active {
+    background-color: var(--corEscura);
+}
+
+.botoes-view .excluir {
+    background-color: #df5b5b;
+    border: 1px solid #b82626;
+}
+
+.botoes-view .excluir:active {
+    background-color: #da8080;
 }

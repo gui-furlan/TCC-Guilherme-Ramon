@@ -3,7 +3,7 @@
 
     <!-- Área do usuário logado -->
     <?php
-        include("includes/usuario_logado.php");
+    include("includes/usuario_logado.php");
     ?>
 
     <!-- Formulário de cadastro -->
@@ -69,4 +69,7 @@
         </form>
     </section>
 </div>
+<script>
+    document.getElementsByTagName("body")[0].style.backgroundColor = "#EBEBEB"
+</script>
 <!-- Fim includes/form_cadastro_oportunidade.php -->
