@@ -17,6 +17,9 @@ if (!isset($_SESSION["login"]) || ($mysqli->connect_error)) {
  */
 require "includes/header.php";
 require "includes/usuario_logado.php";
+if ($_SESSION["login"]["tipo"] == "J") {
+    require "includes/botoes_juridico.html";
+}
 
 /**
  * Seleciona a oportunidade no banco
