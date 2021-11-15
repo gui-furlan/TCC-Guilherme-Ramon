@@ -38,7 +38,7 @@ if (!$mysqli->connect_error) {
              */
             $username = $_POST['username'];
             $nome = $_POST['nome'];
-            $cpf = $_POST['cnpj'];
+            $cnpj = $_POST['cnpj'];
             $email = $_POST['email'];
             $area = $_POST['area'];
             $estado = $_POST['estado'];

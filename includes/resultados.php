@@ -6,13 +6,17 @@
                 /**
                  * Verifica se a pesquisa está vazia
                  * Se sim, título indica que todas as oportunidades foram listadas
-                 * Se não, título indica que está mostrando resultados para a busca
+                 * Se não, verifica se o usuário clicou em "Minhas Oportunidades"
+                 * * Se sim, título indica que está visualizando suas próprias oportunidades
+                 * * Se não, título indica que está mostrando resultados para a busca
                  */ 
                 $p = $_GET["p"];
                 if ($p == "") {
                     echo "<h1>Todas as oportunidades</h1>";
+                } else if ($p == "minhasoportunidades") {
+                    echo "<h1>Suas oportunidades</h1>";
                 } else {
-                    echo "<h1>Resultados para: '" . $_GET["p"] . "'";
+                    echo "<h1>Resultados para: '" . $_GET["p"] . "'</h1>";
                 }
                 ?>
             </div>
@@ -28,19 +32,32 @@
                  * Se nenhuma pesquisa for feita, mostra todas as oportunidades
                  * Se uma pesquisa for feita, faz a busca no banco
                  */
-                if ((!isset($_GET["p"])) || ($_GET["p"] == "")) {
+                if ((!isset($p)) || ($p == "")) {
                     $query = "SELECT codigo_opo, titulo_opo, area_opo, nome_pj, contrato_opo, local_opo 
                     FROM oportunidade JOIN pessoa_juridica ON pk_pessoa_juridica = fk_pessoa_juridica 
                     ORDER BY pk_oportunidade DESC;";
                 } else {
-                    $query = "SELECT codigo_opo, titulo_opo, area_opo, nome_pj, contrato_opo, local_opo 
-                    FROM oportunidade JOIN pessoa_juridica ON pk_pessoa_juridica = fk_pessoa_juridica 
-                    WHERE titulo_opo LIKE '%$p%' 
-                    OR area_opo LIKE '%$p%' 
-                    OR contrato_opo LIKE '%$p%' 
-                    OR local_opo LIKE '%$p%' 
-                    OR nome_pj LIKE '%$p%' 
-                    ORDER BY pk_oportunidade DESC;";
+                    /**
+                     * Verifica se o usuário clicou em "mostrar minhas oportunidades
+                     * Se sim, faz a pesquisa das suas oportunidades
+                     * Se não, faz a pesquisa com o que foi escrito na barra de busca
+                     */
+                    if ($p == "minhasoportunidades") {
+                        $username = $_SESSION["login"]["username"];
+                        $query = "SELECT codigo_opo, titulo_opo, area_opo, nome_pj, contrato_opo, local_opo 
+                        FROM oportunidade JOIN pessoa_juridica ON pk_pessoa_juridica = fk_pessoa_juridica
+                        WHERE username_pj = '$username' 
+                        ORDER BY pk_oportunidade DESC;";
+                    } else {
+                        $query = "SELECT codigo_opo, titulo_opo, area_opo, nome_pj, contrato_opo, local_opo 
+                        FROM oportunidade JOIN pessoa_juridica ON pk_pessoa_juridica = fk_pessoa_juridica 
+                        WHERE titulo_opo LIKE '%$p%' 
+                        OR area_opo LIKE '%$p%' 
+                        OR contrato_opo LIKE '%$p%' 
+                        OR local_opo LIKE '%$p%' 
+                        OR nome_pj LIKE '%$p%' 
+                        ORDER BY pk_oportunidade DESC;";
+                    }
                 }
                 /**
                  * Verifica se existem registros no banco
