@@ -24,9 +24,8 @@ if (!$mysqli->connect_error) {
         /**
          * Verifica se o formulário está preenchido.
          * Se estiver, prossegue para o cadastro no banco.
-         * Se não, carrega o formulário para preenchimento.
+         * Se não, carrega o formulário para preenchimento (não tem }else{).
          */
-        
         if (
             isset($_POST['username']) && isset($_POST['nome']) && isset($_POST['cnpj'])
             && isset($_POST['email']) && isset($_POST['estado']) && isset($_POST['municipio'])
@@ -34,70 +33,110 @@ if (!$mysqli->connect_error) {
         ) {
 
             /**
-             * Instancia variáveis com as informações do formulário
+             * Verifica se o username já não está sendo utilizado
+             * (necessário pois existem duas tabelas de pessoas)
+             * 1 - Cria duas consultas e atribui elas a um índice de uma array
+             * 2 - Num for loop, verifica se foi encontrado um username inválido - "em uso"
+             * 3 - Se não estiver em uso, o programa segue para o cadastro
+             *     Se estiver, o programa lança erro
              */
             $username = $_POST['username'];
-            $nome = $_POST['nome'];
-            $cnpj = $_POST['cnpj'];
-            $email = $_POST['email'];
-            $area = $_POST['area'];
-            $estado = $_POST['estado'];
-            $municipio = $_POST['municipio'];
-            $cep = $_POST['cep'];
-            $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
-            //Password Hash: gera um valor único criptografado para cada senha
+            $query = [
+                0 => "SELECT username_pf FROM pessoa_fisica WHERE username_pf = '$username';",
+                1 => "SELECT username_pj FROM pessoa_juridica WHERE username_pj = '$username';"
+            ];
 
-            /**
-             * Cadastrar no banco:
-             * 1 - Criar query com parâmetros indefinidos;
-             * 2 - Prepare and bind
-             * 3 - Executa
-             * Se executar, inicia uma sessão
-             * Se der erro, lança erro =)
-             */
-            $query = "INSERT INTO pessoa_juridica (username_pj, nome_pj, cnpj_pj,
-                area_pj, municipio_pj, estado_pj, email_pj, senha_pj)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $usernameRepetido = false; //Declaração apenas
+            for ($i = 0; $i <= 1; $i++) {
+                if ($mysqli->query($query[$i])->num_rows > 0) {
+                    $usernameRepetido = true;
+                    break;
+                }
+            }
 
-            if ($stmt = $mysqli->prepare($query)) {
-                $stmt->bind_param(
-                    "ssssssss",
-                    $username,
-                    $nome,
-                    $cnpj,
-                    $area,
-                    $municipio,
-                    $estado,
-                    $email,
-                    $senha
-                );
+            if (!$usernameRepetido) {
+                /**
+                 * Instancia variáveis com as informações do formulário
+                 */
+                $username = $_POST['username'];
+                $nome = $_POST['nome'];
+                $cnpj = $_POST['cnpj'];
+                $email = $_POST['email'];
+                $area = $_POST['area'];
+                $estado = $_POST['estado'];
+                $municipio = $_POST['municipio'];
+                $cep = $_POST['cep'];
+                $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+                //Password Hash: gera um valor único criptografado para cada senha
 
-                if ($stmt->execute()) {
-                    $_SESSION['login'] = [
-                        "username" => $username,
-                        "nome" => $nome,
-                        "sobrenome" => "",
-                        "area" => $area,
-                        "tipo" => "J"
-                    ];
-                    header("Location: index.php");
-                    //print_r($_SESSION['login']);
+                /**
+                 * Cadastrar no banco:
+                 * 1 - Criar query com parâmetros indefinidos;
+                 * 2 - Prepare and bind
+                 * 3 - Executa
+                 * Se executar, inicia uma sessão
+                 * Se der erro, lança erro =)
+                 */
+                $query = "INSERT INTO pessoa_juridica (username_pj, nome_pj, cnpj_pj,
+                area_pj, municipio_pj, estado_pj, cep_pj, email_pj, senha_pj)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                if ($stmt = $mysqli->prepare($query)) {
+                    $stmt->bind_param(
+                        "sssssssss",
+                        $username,
+                        $nome,
+                        $cnpj,
+                        $area,
+                        $municipio,
+                        $estado,
+                        $cep,
+                        $email,
+                        $senha
+                    );
+
+                    if ($stmt->execute()) {
+                        $_SESSION['login'] = [
+                            "username" => $username,
+                            "nome" => $nome,
+                            "sobrenome" => "",
+                            "area" => $area,
+                            "tipo" => "J"
+                        ];
+                        header("Location: index.php");
+                        //print_r($_SESSION['login']);
+                        die();
+                    } else {
+                        $erro = "Não foi possível cadastrar. Verifique as informações do formulário e tente novamente.";
+                    }
                 } else {
-                    die("Erro na execução da query: " . $mysqli->error);
+                    $erro = "Não foi possível cadastrar. Verifique as informações do formulário e tente novamente.";
                 }
             } else {
-                die("Erro na preparação do statement: " . $mysqli->error);
+                $erro = "Este nome de usuário já está em uso. Por favor, tente novamente.";
             }
-        } else {
-            include "includes/header.php";
-            include "includes/form_cadastrorecrutador.php";
-            include "includes/footer.html";
         }
     } else {
         header("Location: index.php");
+        die();
     }
 } else {
     die("Erro ao conectar-se ao banco de dados: " . $mysqli->connect_error);
 }
 
+include "includes/header.php";
+
+//Lança uma div com um erro
+if (isset($erro)) {
+    echo "
+        <div class='container'>
+            <section class='erro-login-cadastro'>
+                Erro: $erro
+            </section>
+        </div>
+    ";
+}
+
+include "includes/form_cadastrorecrutador.php";
+include "includes/footer.html";
 $mysqli->close();

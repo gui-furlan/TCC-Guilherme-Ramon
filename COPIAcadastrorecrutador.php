@@ -3,13 +3,7 @@
 /**
  * Conexão ao banco de dados.
  */
-
-$servername = "localhost";
-$username = "guilherme";
-$password = "abc123";
-$dbname = "tcc2";
-
-$mysqli = new mysqli($servername, $username, $password, $dbname);
+require_once "conexao.php";
 
 /**
  * Verifica a conexão.
@@ -44,7 +38,7 @@ if (!$mysqli->connect_error) {
              */
             $username = $_POST['username'];
             $nome = $_POST['nome'];
-            $cpf = $_POST['cnpj'];
+            $cnpj = $_POST['cnpj'];
             $email = $_POST['email'];
             $area = $_POST['area'];
             $estado = $_POST['estado'];
@@ -97,7 +91,7 @@ if (!$mysqli->connect_error) {
         } else {
             include "includes/header.php";
             include "includes/form_cadastrorecrutador.php";
-            include "includes/footer.php";
+            include "includes/footer.html";
         }
     } else {
         header("Location: index.php");
