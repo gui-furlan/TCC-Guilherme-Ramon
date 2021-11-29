@@ -64,7 +64,7 @@ $row = $mysqli->query($query)->fetch_assoc();
             <div class="empresa-view">
                 <img style="width: 150px" src="img/default_user.jpg">
                 <h3 class="nome-empresa">Sobre <a href=""><?= $row["nome_pj"] ?></a></h3>
-                <p>Fundada em 2014, a empresa tem como principal objetivo incentivar o avanço tecnológico e desenvolver novas soluções...</p>
+                <p><?= $row["bio_pj"] ?></p>
             </div>
         </div>
         <div class="clear"></div>

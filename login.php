@@ -100,7 +100,7 @@ if (!$mysqli->connect_error) {
                         $_SESSION["login"] = [
                             "username" => $row["username_pj"],
                             "nome" => $row["nome_pj"],
-                            "sobrenome" => $row["sobrenome_pj"],
+                            "sobrenome" => "",
                             "area" => $row["area_pj"],
                             "tipo" => "J"
                         ];
